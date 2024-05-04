@@ -1,23 +1,17 @@
+import { Box } from "@mui/material";
 import SearchDropDown from "./SearchDropDown";
 import SearchItems from "./SearchItems";
 
 const Search = () => {
     return (
-        <div
-            style={{
-                width: "100%",
-                display: "flex",
-                alignItems: "center",
-                gap: "10px",
-            }}
-        >
-            <SearchDropDown label="Roles" />
-            <SearchDropDown label="Number of Employees" />
-            <SearchDropDown label="Experience" />
-            <SearchDropDown label="Remote" />
-            <SearchDropDown label="Minimum Base Pay Salary" />
+        <Box display={"flex"} alignItems={"center"} justifyContent={"center"}>
+            <SearchDropDown width={150} label="Roles" />
+            <SearchDropDown width={250} label="Number of Employees" />
+            <SearchDropDown width={150} label="Experience" />
+            <SearchDropDown width={120} label="Remote" />
+            <SearchDropDown width={250} label="Minimum Base Pay Salary" />
             <SearchItems label="Search Company Name" />
-        </div>
+        </Box>
     );
 };
 

@@ -9,6 +9,7 @@ const SearchItems = ({ label }: { label: string }) => {
                 },
             }}
             label={label}
+            placeholder={label}
             variant="outlined"
         />
     );
