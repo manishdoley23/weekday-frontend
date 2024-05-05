@@ -34,138 +34,180 @@ const ViewJobItem = ({
     minJdSalary,
     salaryCurrencyCode,
 }: JobItem) => {
-    console.log("jobDetailsFromCompany:", jobDetailsFromCompany);
+    const salaryCode = salaryCurrencyCode === "USD" ? "$" : "₹";
 
     return (
-        <div>
-            <Card
+        <Card
+            sx={{
+                borderRadius: 3,
+                maxWidth: 345,
+                paddingX: 1,
+                paddingY: 2,
+                transition: "0.3s",
+                "&:hover": {
+                    transform: "scale(1.01)",
+                    boxShadow: "0 4px 20px 0 rgba(0,0,0,0.12)",
+                },
+            }}
+        >
+            <Box
                 sx={{
-                    borderRadius: 3,
-                    maxWidth: 345,
-                    paddingX: 0.5,
-                    paddingY: 0.8,
+                    borderRadius: "10px",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "start",
+                    justifyContent: "space-between",
+                    paddingLeft: "6px",
+                    paddingRight: "6px",
+                    paddingTop: "10px",
+                    paddingBottom: "4px",
+                    boxShadow: "1px 2px 2px rgba(0, 0, 0, 0.25)",
+                    marginLeft: "10px",
+                    width: "fit-content",
+                    overflow: "hidden",
                 }}
             >
-                <div
-                    style={{
-                        borderRadius: "10px",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                        paddingLeft: "6px",
-                        paddingRight: "6px",
-                        paddingTop: "4px",
-                        paddingBottom: "4px",
-                    }}
+                <Typography
+                    fontSize={10}
+                    variant="body2"
+                    color="text.secondary"
                 >
-                    <Typography
-                        fontSize={10}
-                        variant="body2"
-                        color="text.secondary"
-                    >
-                        ⏳ Posted 10 days ago
-                    </Typography>
-                </div>
+                    ⏳ Posted 10 days ago
+                </Typography>
+            </Box>
+            <Box
+                sx={{
+                    position: "relative",
+                }}
+            >
                 <CardHeader
-                    avatar={<Avatar src={logoUrl}>R</Avatar>}
-                    // action={
-                    //     <IconButton aria-label="settings">
-                    //         <MoreVertIcon />
-                    //     </IconButton>
-                    // }
+                    avatar={<Avatar src={logoUrl} />}
                     title={companyName}
                     subheader={jobRole}
                 />
-                <CardContent
-                    style={{
-                        position: "relative",
-                        maxHeight: "500px",
-                        overflow: "hidden",
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "center",
-                        alignItems: "center",
+                <Typography
+                    variant="overline"
+                    fontSize={11}
+                    sx={{
+                        textTransform: "capitalize",
+                        marginLeft: 9,
+                        position: "absolute",
+                        bottom: -10,
                     }}
                 >
-                    <Typography variant="body2" color="text.secondary">
-                        {jobDetailsFromCompany}
-                    </Typography>
-                    <div
+                    {location}
+                </Typography>
+            </Box>
+            <CardContent
+                sx={{
+                    position: "relative",
+                    maxHeight: "500px",
+                    overflow: "hidden",
+                    display: "flex",
+                    flexDirection: "column",
+                    "&:after": {
+                        content: '""',
+                        position: "absolute",
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        height: "350px",
+                        backgroundImage:
+                            "linear-gradient(to top, white, transparent)",
+                        zIndex: 1,
+                    },
+                }}
+            >
+                <Typography
+                    variant="caption"
+                    fontFamily={"monospace"}
+                    color="GrayText"
+                >
+                    Estimated Salary: {salaryCode}
+                    {minJdSalary ?? "TBD"} - {maxJdSalary} LPA ✅
+                </Typography>
+                <Typography marginTop={1} fontSize={15} textAlign={"left"}>
+                    About Company:
+                </Typography>
+                <Typography textAlign={"left"} variant="body2" fontWeight={600}>
+                    About us:
+                </Typography>
+                <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    style={{
+                        overflowWrap: "break-word",
+                        wordWrap: "break-word",
+                        hyphens: "auto",
+                    }}
+                >
+                    {jobDetailsFromCompany}
+                </Typography>
+                {/* <div
                         style={{
                             position: "absolute",
                             bottom: 0,
-                            width: "100%",
+                            border: "1px solid red",
                             height: "350px",
+                            width: "100%",
+                            boxSizing: "border-box",
                             backgroundImage:
                                 "linear-gradient(to top, white, transparent)",
                         }}
-                    />
+                    /> */}
+                <Box
+                    sx={{
+                        width: "100%",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        zIndex: 10,
+                    }}
+                >
                     <Button
                         variant="text"
                         color="primary"
-                        style={{
+                        sx={{
                             position: "absolute",
                             bottom: 0,
+                            textTransform: "capitalize",
                         }}
                     >
                         View Job
                     </Button>
-                </CardContent>
-                {/* <CardActions disableSpacing>
-                    <IconButton aria-label="add to favorites">
-                        <FavoriteIcon />
-                    </IconButton>
-                    <IconButton aria-label="share">
-                        <ShareIcon />
-                    </IconButton>
-                    <ExpandMore
-                        expand={expanded}
-                        onClick={handleExpandClick}
-                        aria-expanded={expanded}
-                        aria-label="show more"
-                    >
-                        <ExpandMoreIcon />
-                    </ExpandMore>
-                </CardActions>
-                <Collapse in={expanded} timeout="auto" unmountOnExit>
-                    <CardContent>
-                        <Typography paragraph>Method:</Typography>
-                        <Typography paragraph>
-                            Heat 1/2 cup of the broth in a pot until simmering,
-                            add saffron and set aside for 10 minutes.
-                        </Typography>
-                        <Typography paragraph>
-                            Heat oil in a (14- to 16-inch) paella pan or a
-                            large, deep skillet over medium-high heat. Add
-                            chicken, shrimp and chorizo, and cook, stirring
-                            occasionally until lightly browned, 6 to 8 minutes.
-                            Transfer shrimp to a large plate and set aside,
-                            leaving chicken and chorizo in the pan. Add
-                            pimentón, bay leaves, garlic, tomatoes, onion, salt
-                            and pepper, and cook, stirring often until thickened
-                            and fragrant, about 10 minutes. Add saffron broth
-                            and remaining 4 1/2 cups chicken broth; bring to a
-                            boil.
-                        </Typography>
-                        <Typography paragraph>
-                            Add rice and stir very gently to distribute. Top
-                            with artichokes and peppers, and cook without
-                            stirring, until most of the liquid is absorbed, 15
-                            to 18 minutes. Reduce heat to medium-low, add
-                            reserved shrimp and mussels, tucking them down into
-                            the rice, and cook again without stirring, until
-                            mussels have opened and rice is just tender, 5 to 7
-                            minutes more. (Discard any mussels that don&apos;t
-                            open.)
-                        </Typography>
-                        <Typography>
-                            Set aside off of the heat to let rest for 10
-                            minutes, and then serve.
-                        </Typography>
-                    </CardContent>
-                </Collapse> */}
-            </Card>
-        </div>
+                </Box>
+            </CardContent>
+            <Box
+                sx={{
+                    paddingX: 2,
+                    paddingTop: 2,
+                }}
+            >
+                <Typography
+                    variant="caption"
+                    color="GrayText"
+                    fontFamily={"monospace"}
+                >
+                    Minimum Experience
+                </Typography>
+                <Typography color={"GrayText"} variant="body2">
+                    {minExp ?? 0} years
+                </Typography>
+                <Button
+                    fullWidth
+                    variant="outlined"
+                    sx={{
+                        background: "rgb(85, 239, 196)",
+                        color: "black",
+                        textTransform: "capitalize",
+                        paddingY: 1,
+                        marginTop: 2,
+                    }}
+                >
+                    ⚡️ Easy Apply
+                </Button>
+            </Box>
+        </Card>
     );
 };
 

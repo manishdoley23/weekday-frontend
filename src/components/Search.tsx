@@ -4,7 +4,12 @@ import SearchItems from "./SearchItems";
 
 const Search = () => {
     return (
-        <Box display={"flex"} alignItems={"center"} justifyContent={"center"}>
+        <Box
+            display={"flex"}
+            alignItems={"center"}
+            justifyContent={"center"}
+            flexWrap={"wrap"}
+        >
             <SearchDropDown width={150} label="Roles" />
             <SearchDropDown width={250} label="Number of Employees" />
             <SearchDropDown width={150} label="Experience" />
